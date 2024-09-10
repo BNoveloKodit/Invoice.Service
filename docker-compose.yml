@@ -1,0 +1,42 @@
+version: '3.8'
+services:
+  rolesservice:
+    container_name: roles_service
+    build: .
+    ports:
+      - "5005:5162"
+    volumes:
+      - .:/app
+    working_dir: /app
+    command: >
+      sh -c "if [ -f *.csproj ]; then
+               dotnet clean Infraction.Backend.Image.Service.csproj;
+               dotnet restore Infraction.Backend.Image.Service.csproj && dotnet build Infraction.Backend.Image.Service.csproj;
+               dotnet run --project Infraction.Backend.Image.Service.csproj;
+             else
+               tail -f /dev/null
+             fi"
+    depends_on:
+      - mongorolesdbservice
+    networks:
+      - nroles
+
+  mongorolesdbservice:
+    image: mongo:latest
+    container_name: mongorolesdb_service
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: roles123456
+    ports:
+      - "27021:27017"
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - nroles
+
+networks:
+  nroles:
+    driver: bridge
+
+volumes:
+  mongodb_data:

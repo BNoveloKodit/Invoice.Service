@@ -1,0 +1,49 @@
+# Compiled files
+bin/
+obj/
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Mac files
+*.DS_Store
+
+# Build results
+*.exe
+*.dll
+*.pdb
+*.app
+*.log
+
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+# Rider project files
+.idea/
+
+# Visual Studio Code files 
+.vscode/
+.vs/
+
+# Packages
+*.nupkg
+*.snupkg
+
+# DotNet Core
+project.lock.json
+project.fragment.lock.json
+
+# Build scripts
+*.sh
+*.cmd
+
+# Other
+.vscode/
+out/
+.vs/
+/.vs/CAD-BackEnd-Security-PermissionService/FileContentIndex/c68c763a-1e25-4255-a25c-c626cbae8c76.vsidx
+/.sonarqube/conf
