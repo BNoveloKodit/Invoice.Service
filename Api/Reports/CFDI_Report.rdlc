@@ -2870,6 +2870,8 @@
     </ReportParameter>
     <ReportParameter Name="ImporteConLetra">
       <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
     <ReportParameter Name="Observaciones">
@@ -2922,6 +2924,8 @@
     </ReportParameter>
     <ReportParameter Name="ComplementoCertSelloSAT">
       <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
     <ReportParameter Name="NoCertEmisor">
