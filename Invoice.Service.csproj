@@ -21,6 +21,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Api\Controllers\ImageClientController.cs" />
+    <Compile Remove="Infrastructure\Utils\Shared\UtilsConfiguration.cs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="13.0.1" />
