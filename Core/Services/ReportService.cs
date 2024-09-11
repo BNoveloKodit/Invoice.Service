@@ -107,29 +107,29 @@ namespace Invoice.Service.Core.Services
                             );
                         }
 
-                        reportParameters.Add(new ReportParameter("TipoComprobante", comprobante?.Attribute("TipoDeComprobante")?.Value));
-                        reportParameters.Add(new ReportParameter("Version", comprobante?.Attribute("Version")?.Value));
-                        reportParameters.Add(new ReportParameter("FechaEmision", comprobante?.Attribute("Fecha")?.Value.Replace("T", " ")));
-                        reportParameters.Add(new ReportParameter("Folio", comprobante?.Attribute("Folio")?.Value));
-                        reportParameters.Add(new ReportParameter("Serie", comprobante?.Attribute("Serie")?.Value));
-                        reportParameters.Add(new ReportParameter("SubTotal", comprobante?.Attribute("SubTotal")?.Value));
+                        reportParameters.Add(new ReportParameter("TipoComprobante", string.IsNullOrEmpty(comprobante?.Attribute("TipoDeComprobante")?.Value) ? "" : comprobante?.Attribute("TipoDeComprobante")?.Value));
+                        reportParameters.Add(new ReportParameter("Version", string.IsNullOrEmpty(comprobante?.Attribute("Version")?.Value) ? "" : comprobante?.Attribute("Version")?.Value));
+                        reportParameters.Add(new ReportParameter("FechaEmision", string.IsNullOrEmpty(comprobante?.Attribute("Fecha")?.Value.Replace("T", " ")) ? "" : comprobante?.Attribute("Fecha")?.Value.Replace("T", " ")));
+                        reportParameters.Add(new ReportParameter("Folio", string.IsNullOrEmpty(comprobante?.Attribute("Folio")?.Value) ? "" : comprobante?.Attribute("Folio")?.Value));
+                        reportParameters.Add(new ReportParameter("Serie", string.IsNullOrEmpty(comprobante?.Attribute("Serie")?.Value) ? "" : comprobante?.Attribute("Serie")?.Value));
+                        reportParameters.Add(new ReportParameter("SubTotal", string.IsNullOrEmpty(comprobante?.Attribute("SubTotal")?.Value) ? "" : comprobante?.Attribute("SubTotal")?.Value));
                         reportParameters.Add(new ReportParameter("Descuento", "0.0"));
-                        reportParameters.Add(new ReportParameter("IVA", impuestos?.Attribute("TotalImpuestosTrasladados")?.Value));
+                        reportParameters.Add(new ReportParameter("IVA", string.IsNullOrEmpty(impuestos?.Attribute("TotalImpuestosTrasladados")?.Value) ? "" : impuestos?.Attribute("TotalImpuestosTrasladados")?.Value));
                         reportParameters.Add(new ReportParameter("RET", "0.0"));
-                        reportParameters.Add(new ReportParameter("TOTAL", comprobante?.Attribute("Total")?.Value));
-                        reportParameters.Add(new ReportParameter("ImporteConLetra", NumeroALetras.Convertir(Convert.ToDecimal(comprobante?.Attribute("Total")?.Value)).ToUpper()));
+                        reportParameters.Add(new ReportParameter("TOTAL", string.IsNullOrEmpty(comprobante?.Attribute("Total")?.Value) ? "" : comprobante?.Attribute("Total")?.Value));
+                        reportParameters.Add(new ReportParameter("ImporteConLetra", string.IsNullOrEmpty(NumeroALetras.Convertir(Convert.ToDecimal(comprobante?.Attribute("Total")?.Value)).ToUpper()) ? "" : NumeroALetras.Convertir(Convert.ToDecimal(comprobante?.Attribute("Total")?.Value)).ToUpper()));
                     }
                     else
                     {
                         var timbreFiscal = xml.Descendants(ns3 + "TimbreFiscalDigital").FirstOrDefault();
                         if (timbreFiscal != null)
                         {
-                            string uuid = timbreFiscal.Attribute("UUID")?.Value;
-                            string version = timbreFiscal.Attribute("Version")?.Value;
-                            string fechaTimbrado = timbreFiscal.Attribute("FechaTimbrado")?.Value;
-                            string selloCFD = timbreFiscal.Attribute("SelloCFD")?.Value;
-                            string noCertificadoSAT = timbreFiscal.Attribute("NoCertificadoSAT")?.Value;
-                            string selloSAT = timbreFiscal.Attribute("SelloSAT")?.Value;
+                            string? uuid = timbreFiscal.Attribute("UUID")?.Value;
+                            string? version = timbreFiscal.Attribute("Version")?.Value;
+                            string? fechaTimbrado = timbreFiscal.Attribute("FechaTimbrado")?.Value;
+                            string? selloCFD = timbreFiscal.Attribute("SelloCFD")?.Value;
+                            string? noCertificadoSAT = timbreFiscal.Attribute("NoCertificadoSAT")?.Value;
+                            string? selloSAT = timbreFiscal.Attribute("SelloSAT")?.Value;
 
                             Console.WriteLine("UUID: " + uuid);
                             Console.WriteLine("Fecha Timbrado: " + fechaTimbrado);
@@ -137,13 +137,13 @@ namespace Invoice.Service.Core.Services
                             Console.WriteLine("No. Certificado SAT: " + noCertificadoSAT);
                             Console.WriteLine("Sello SAT: " + selloSAT);
 
-                            reportParameters.Add(new ReportParameter("UUID", uuid));
+                            reportParameters.Add(new ReportParameter("UUID", uuid ?? ""));
                             reportParameters.Add(new ReportParameter("Observaciones", ""));
                             reportParameters.Add(new ReportParameter("ComplementoCertSAT", $"||{version}|{uuid}|{fechaTimbrado}|{selloCFD}|{noCertificadoSAT}||"));
                             reportParameters.Add(new ReportParameter("NoCertEmisor", ""));
-                            reportParameters.Add(new ReportParameter("ComplementoCertEmisor", selloCFD));
-                            reportParameters.Add(new ReportParameter("NoCertSAT", noCertificadoSAT));
-                            reportParameters.Add(new ReportParameter("ComplementoCertSelloSAT", selloSAT));
+                            reportParameters.Add(new ReportParameter("ComplementoCertEmisor", selloCFD ?? ""));
+                            reportParameters.Add(new ReportParameter("NoCertSAT", noCertificadoSAT ?? ""));
+                            reportParameters.Add(new ReportParameter("ComplementoCertSelloSAT", selloSAT ?? ""));
                         }
 
                         
