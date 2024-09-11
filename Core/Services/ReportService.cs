@@ -25,7 +25,7 @@ namespace Invoice.Service.Core.Services
             var reportPath = Path.Combine(Directory.GetCurrentDirectory(), "Api\\Reports", "CFDI_Report.rdlc");
             if (!System.IO.File.Exists(reportPath))
             {
-                //return NotFound("No se encontró el archivo de informe RDLC.");
+                return [];
             }
 
             if (xmls != null && xmls.Count > 1)
