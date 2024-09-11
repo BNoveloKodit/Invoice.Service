@@ -165,7 +165,7 @@ namespace Invoice.Service.Core.Services
             localReport.ReportPath = reportPath;
             localReport.EnableExternalImages = true;
             
-            localReport.SetParameters(reportParameters);            
+            //localReport.SetParameters(reportParameters);            
             
             // Generar el informe como PDF
             return localReport.Render("PDF");
