@@ -46,7 +46,7 @@ namespace Infraction.Backend.Image.Service.Infrastructure.Middleware
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.InnerException.ToString());
+                Console.WriteLine(ex.InnerException.Message.ToString());
                 await HandleExceptionAsync(context, ex, """Se produjo un error. Mensaje: {exceptionMsg} - StackTrace: {exceptionStack} - InnerException: {exceptionInnerMsg}""");
                 
             }
