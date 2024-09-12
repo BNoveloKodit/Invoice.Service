@@ -22,10 +22,11 @@ namespace Invoice.Service.Core.Services
             DataTable dataTable = new DataTable();
             DataTable dataTable2 = new DataTable();
             // Cargar el archivo RDLC
-            var reportPath = Path.Combine(Directory.GetCurrentDirectory(), "Api\\Reports", "CFDI_Report.rdlc");
+            var reportPath = "Api/Reports/CFDI_Report.rdlc";
             if (!System.IO.File.Exists(reportPath))
             {
-                return [];
+                // Lanza una excepción o maneja el error
+                throw new FileNotFoundException("El archivo de informe no se encontró", reportPath);
             }
 
             if (xmls != null && xmls.Count > 1)
@@ -165,7 +166,7 @@ namespace Invoice.Service.Core.Services
             localReport.ReportPath = reportPath;
             localReport.EnableExternalImages = true;
             
-            //localReport.SetParameters(reportParameters);            
+            localReport.SetParameters(reportParameters);            
             
             // Generar el informe como PDF
             return localReport.Render("PDF");
