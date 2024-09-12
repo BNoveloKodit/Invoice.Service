@@ -130,13 +130,7 @@ namespace Invoice.Service.Core.Services
                             string? fechaTimbrado = timbreFiscal.Attribute("FechaTimbrado")?.Value;
                             string? selloCFD = timbreFiscal.Attribute("SelloCFD")?.Value;
                             string? noCertificadoSAT = timbreFiscal.Attribute("NoCertificadoSAT")?.Value;
-                            string? selloSAT = timbreFiscal.Attribute("SelloSAT")?.Value;
-
-                            Console.WriteLine("UUID: " + uuid);
-                            Console.WriteLine("Fecha Timbrado: " + fechaTimbrado);
-                            Console.WriteLine("Sello CFD: " + selloCFD);
-                            Console.WriteLine("No. Certificado SAT: " + noCertificadoSAT);
-                            Console.WriteLine("Sello SAT: " + selloSAT);
+                            string? selloSAT = timbreFiscal.Attribute("SelloSAT")?.Value;                            
 
                             reportParameters.Add(new ReportParameter("UUID", uuid ?? ""));
                             reportParameters.Add(new ReportParameter("Observaciones", ""));
