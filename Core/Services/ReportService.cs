@@ -22,7 +22,8 @@ namespace Invoice.Service.Core.Services
             DataTable dataTable = new DataTable();
             DataTable dataTable2 = new DataTable();
             // Cargar el archivo RDLC
-            var reportPath = "Api/Reports/CFDI_Report.rdlc";
+            //var reportPath = "Api/Reports/CFDI_Report.rdlc";
+            var reportPath = Path.Combine(Directory.GetCurrentDirectory(), "Api/Reports/", "CFDI_Report.rdlc");
             if (!System.IO.File.Exists(reportPath))
             {
                 // Lanza una excepción o maneja el error
