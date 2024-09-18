@@ -147,8 +147,8 @@ namespace Invoice.Service.Core.Services
             }
 
             // Convertir el byte[] a Base64 para usarlo como Embedded Image en el ReportViewer
-            //string base64Image = GenerateQrCode(xmls);
-            //dataTable.Rows[0].SetField(16, $"{base64Image}");
+            string base64Image = GenerateQrCode(xmls);
+            dataTable.Rows[0].SetField(16, $"{base64Image}");
 
             // Agregar la imagen como parámetro al ReportViewer
             reportParameters.Add(new ReportParameter("QRCodeImage", $""));
@@ -158,10 +158,12 @@ namespace Invoice.Service.Core.Services
             localReport.DataSources.Add(new ReportDataSource("CFDIConceptosDataSet", dataTable2));
 
             localReport.ReportPath = reportPath;
-            localReport.EnableExternalImages = true;
-            
-            localReport.SetParameters(reportParameters);            
-            
+            localReport.EnableExternalImages = true;                                    
+            localReport.SetParameters(reportParameters);
+            localReport.Refresh();
+
+            Console.WriteLine($"Renderiza {reportPath}");
+
             // Generar el informe como PDF
             return localReport.Render("PDF");
         }
